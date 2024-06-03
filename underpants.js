@@ -242,12 +242,16 @@ _.each = function (collection, func) {
 */
 
 _.unique = function (arr) {
+    // establish new array
     let newArr = [];
+    // iterate over array
     for (let i = 0; i < arr.length; i++) {
+        // if the element is the first instance of the element, then add it to the new array
         if (i === _.indexOf(arr, arr[i])) {
             newArr.push(arr[i])
         }
     }
+    // return the new array
     return newArr;
 }
 
@@ -267,6 +271,9 @@ _.unique = function (arr) {
 *   use _.each in your implementation
 */
 
+_.fiter = function (arr, func) {
+    
+}
 
 /** _.reject
 * Arguments:
