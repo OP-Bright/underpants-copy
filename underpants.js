@@ -42,6 +42,27 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function (value) {
+    // first do typeof.
+    // if the typeof says it is an array, do an Array.isArray to check it.
+    // if it's not it's an object, print object.
+    // if it is, it's an array, print array.
+    // if it's neither, then just print the typeof.
+
+    if (typeof value === "object") {
+        if (value === null) {
+            return "null";
+        }
+        if (Array.isArray(value)) {
+            return "array"
+        } else {
+            return "object"
+        }
+    } else {
+        return typeof value;
+    }
+}
+
 
 /** _.first
 * Arguments:
@@ -208,6 +229,14 @@ var _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+
+_.map = function (collection, func) {
+    // declare new array
+    // If collection is not an array, it's probably an object.
+    // loop over the collection for loop for an array, for in for an object.
+        //new array.push(func(collection[i], i, collection)) 
+    // return new array
+};
 
 
 /** _.pluck
