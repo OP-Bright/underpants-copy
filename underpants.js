@@ -21,6 +21,10 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function (value) {
+    return value;
+}
+
 
 /** _.typeOf
 * Arguments:
@@ -82,6 +86,28 @@ _.typeOf = function (value) {
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+_.first = function (arr, num) {
+    // if not an array return an empty array.
+    // if no num is given return first element in the array
+    // if it is, then return the first <num> elements in the array
+    // if it is greater than, return all elements
+    // if it is negative don't do it.
+    if (Array.isArray(arr) === false || num < 1) {
+        return []
+    }
+    if (num === undefined || num === 1) {
+        return arr[0]
+    }
+    if (num > arr.length) {
+        return arr
+    }
+    let newArr = [];
+    for (let i = 0; i < num; i++) {
+        newArr.push(arr[i])
+    }
+    return newArr
+}
+
 
 /** _.last
 * Arguments:
@@ -101,6 +127,28 @@ _.typeOf = function (value) {
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function (arr, num) {
+    //if arr isn't an array or if num < 1 return an empty array.
+    // if num is not given or not a number or 1 return just the last element in the array
+    // if <num> > arr.length then return all.
+    // return last <num> items in array
+
+    if (Array.isArray(arr) === false || num < 1) {
+        return []
+    }
+    if (num === undefined || num === 1) {
+        return arr[arr.length - 1]
+    }
+    if (num > arr.length) {
+        return arr
+    }
+    let newArr = [];
+    // you have to reduce num by 1 since we're dealing with indexxed stuff.
+    for (let i = num - 1; i < arr.length; i++) {
+        newArr.push(arr[i])
+    }
+    return newArr
+}
 
 /** _.indexOf
 * Arguments:
@@ -118,6 +166,18 @@ _.typeOf = function (value) {
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function (arr, value) {
+    // if the value isn't in the array return -1
+    if (arr.includes(value) === false) {
+        return -1;
+    }
+    // return the index of the first instance of value
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === value) {
+            return i;
+        }
+    }
+}
 
 /** _.contains
 * Arguments:
