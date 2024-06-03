@@ -194,6 +194,9 @@ _.indexOf = function (arr, value) {
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function (arr, value) {
+    return arr.includes(value) ? true : false; 
+}
 
 /** _.each
 * Arguments:
@@ -211,6 +214,22 @@ _.indexOf = function (arr, value) {
 *      -> should log "a" "b" "c" to the console
 */
 
+_.each = function (collection, func) {
+    // check if collection is an array
+    if (Array.isArray(collection)) {
+        // iterate over array if it is
+        for (let i = 0; i < collection.length; i++) {
+            // execute function passing in the appropriate parameters
+            func(collection[i], [i], collection)
+        }
+    } else {
+        // iterate over object if it isn't
+        for (let i in collection) {
+            // executre function passing in appropriate parameters
+            func(collection[i], [i], collection)
+        }
+    }
+}
 
 /** _.unique
 * Arguments:
@@ -222,6 +241,15 @@ _.indexOf = function (arr, value) {
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function (arr) {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (i === _.indexOf(arr, arr[i])) {
+            newArr.push(arr[i])
+        }
+    }
+    return newArr;
+}
 
 /** _.filter
 * Arguments:
