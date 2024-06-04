@@ -433,6 +433,57 @@ _.pluck = function (inputArr, property) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+ _.every = function (collection, func) {
+    // is func given or not a function? then just go with truthy or falsy values as the test.
+    // loop over the collection. for loop for an array, for in for an object.
+        //if (collection[i]) {do nothing} else {return false;}
+        // return true
+    // If collection is not an array, it's probably an object.
+    // loop over the collection. for loop for an array, for in for an object.
+        //if (func(collection[i], i, collection)) {do nothing} else {return false;}
+        // return true
+    if (Array.isArray(collection)) {
+        if (func) {
+            for (let i = 0; i < collection .length; i++) {
+                if (func(collection[i], i, collection)) {
+                    
+                } else {
+                    return false
+                }
+            }
+            return true
+        } else {
+            for (let i = 0; i < collection .length; i++) {
+                if (collection[i]) {
+                    
+                } else {
+                    return false
+                }
+            }
+            return true
+        }
+    } else {
+        if (func) {
+            for (let i in collection) {
+                if (func(collection[i], i, collection)) {
+                    
+                } else {
+                    return false
+                }
+            }
+            return true
+        } else {
+            for (let i in collection  ) {
+                if (collection[i]) {
+                    
+                } else {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+ }
 
 /** _.some
 * Arguments:
