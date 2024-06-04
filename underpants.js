@@ -331,6 +331,22 @@ _.reject = function (arr, func) {
 }
 */
 
+_.partition = function (arr, func) {
+    //make new array that contains 2 arrays
+    // iterate over arr, passing in the appropriate arguments into func.
+        // if func returns truthy, add the element to the first array in the new array
+        // if the func returns falsy, add the element to the second array in the new array.
+    // return new array.
+    let newArr = [[], []]
+    for (let i = 0; i < arr.length; i++) {
+        if (func(arr[i], i, arr)) {
+            newArr[0].push(arr[i]);
+        } else {
+            newArr[1].push(arr[i])
+        }
+    }
+    return newArr;
+}
 
 /** _.map
 * Arguments:
@@ -351,9 +367,20 @@ _.reject = function (arr, func) {
 _.map = function (collection, func) {
     // declare new array
     // If collection is not an array, it's probably an object.
-    // loop over the collection for loop for an array, for in for an object.
+    // loop over the collection. for loop for an array, for in for an object.
         //new array.push(func(collection[i], i, collection)) 
     // return new array
+    let newArr = [];
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            newArr.push(func(collection[i], i, collection)) 
+        }
+    } else {
+        for (let i in collection) {
+            newArr.push(func(collection[i], i, collection)) 
+        }
+    }
+    return newArr;
 };
 
 
@@ -368,6 +395,22 @@ _.map = function (collection, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function (inputArr, property) {
+    // create newArr
+    // iterate over array
+        // if inputArr is truthy, it probably exists. push it to newArr.
+    // return newArr
+    // why do i have to use _.map this is just not what it was made for.
+    let newArr = [];
+    for (let i = 0; i < inputArr.length; i++) {
+        _.map(inputArr[i], function (element, key) {
+            if (key === property) {
+                newArr.push(element);
+            }
+        })
+    }
+    return newArr
+}
 
 /** _.every
 * Arguments:
