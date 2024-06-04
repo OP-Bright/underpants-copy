@@ -271,8 +271,18 @@ _.unique = function (arr) {
 *   use _.each in your implementation
 */
 
-_.fiter = function (arr, func) {
-    
+_.filter = function (inputArr, func) {
+    // create new array
+    // iterate over arr
+    //if the result of passing in the appropriate arguments of the array into func is truthy, then push it to the new array.
+    // return the new array
+    let newArr = [];
+    for (let i = 0; i < inputArr.length; i++) {
+        if (func(inputArr[i], i, inputArr)) {
+            newArr.push(inputArr[i]);
+        }
+    }
+    return newArr;
 }
 
 /** _.reject
@@ -288,6 +298,19 @@ _.fiter = function (arr, func) {
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function (arr, func) {
+    // create new array
+    // iterate over arr, passing the appropriate arguements into func.
+        //if the result is false, push the element into the new array.
+    // return new array.
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (!(func(arr[i], i, arr))) {
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 
 /** _.partition
 * Arguments:
