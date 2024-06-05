@@ -506,6 +506,50 @@ _.pluck = function (inputArr, property) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function (collection, func) {
+    // is func given or not a function? then just go with truthy or falsy values as the test.
+    // loop over the collection. for loop for an array, for in for an object.
+        //if (collection[i], i, collection) {return true}, otherwise do nothing
+        // return false
+    // If collection is not an array, it's probably an object.
+    // loop over the collection. for loop for an array, for in for an object.
+        //if (func(collection[i], i, collection)) {return true}, otherwise do nothing
+        // return false
+
+        if (Array.isArray(collection)) {
+            if (func) {
+                for (let i = 0; i < collection .length; i++) {
+                    if (func(collection[i], i, collection)) {
+                        return true
+                    } 
+                }
+                return false
+            } else {
+                for (let i = 0; i < collection .length; i++) {
+                    if (collection[i]) {
+                       return true 
+                    }
+                }
+                return false
+            }
+        } else {
+            if (func) {
+                for (let i in collection) {
+                    if (func(collection[i], i, collection)) {
+                        return true
+                    } 
+                }
+                return false
+            } else {
+                for (let i in collection  ) {
+                    if (collection[i]) {
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+     }
 
 /** _.reduce
 * Arguments:
@@ -526,6 +570,17 @@ _.pluck = function (inputArr, property) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function (arr, func, seed = arr[0]) { // if seed isn't given, set it to the first element of the array.
+    // store previous result, initializing it to seed.
+        //loop over the array. Call func on every item in the array, passing in the appropriate arguments
+        // set previous result to the result of calling func on the element.
+    // return the last element, which should currently be the "previous result"
+    let previousResult = seed;
+    for (let i = 0; i < arr.length; i++) {
+        previousResult = func(previousResult, arr[i], i);
+    }
+    return previousResult;
+}
 
 /** _.extend
 * Arguments:
@@ -535,12 +590,26 @@ _.pluck = function (inputArr, property) {
 * Objectives:
 *   1) Copy properties from <object 2> to <object 1>
 *   2) If more objects are passed in, copy their properties to <object 1> as well, in the order they are passed in.
-*   3) Return the update <object 1>
+*   3) Return the updated <object 1>
 * Examples:
 *   var data = {a:"one"};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function (obj1, ...objects) {
+    // store arguments.
+    // loop over the args.
+        // for every arg, loop over its properties, adding the property of the other ones to the first one.
+    let args = objects;
+    let newObj = obj1;
+    for (let i = 0; i < args.length; i++) {
+        for (let thing in args[i]) {
+            newObj[thing] = args[i][thing];
+        }
+    }
+    return newObj;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
