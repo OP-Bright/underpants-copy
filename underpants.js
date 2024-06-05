@@ -570,16 +570,25 @@ _.some = function (collection, func) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
-_.reduce = function (arr, func, seed = arr[0]) { // if seed isn't given, set it to the first element of the array.
+_.reduce = function (arr, func, seed) { // if seed isn't given, set it to the first element of the array.
     // store previous result, initializing it to seed.
         //loop over the array. Call func on every item in the array, passing in the appropriate arguments
         // set previous result to the result of calling func on the element.
     // return the last element, which should currently be the "previous result"
-    let previousResult = seed;
-    for (let i = 0; i < arr.length; i++) {
-        previousResult = func(previousResult, arr[i], i);
+    if (seed === undefined) {
+        let previousResult = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+            previousResult = func(previousResult, arr[i], i);
+        }
+        return previousResult;
+    } else {
+        let previousResult = seed;
+        for (let i = 0; i < arr.length; i++) {
+            previousResult = func(previousResult, arr[i], i);
+        }
+        return previousResult;
     }
-    return previousResult;
+
 }
 
 /** _.extend
